@@ -1,0 +1,23 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: argocd-operator-hack
+rules:
+  - apiGroups:
+      - autoscaling
+    resources:
+      - horizontalpodautoscalers
+    verbs:
+      - "*"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: argocd-operator-hack
+subjects:
+  - kind: ServiceAccount
+    name: argocd-operator
+roleRef:
+  kind: Role
+  name: argocd-operator-hack
+  apiGroup: rbac.authorization.k8s.io

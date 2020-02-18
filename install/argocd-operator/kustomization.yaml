@@ -1,0 +1,5 @@
+namespace: argocd
+resources:
+  - namespace.yaml
+  - operator_group.yaml
+  - subscription.yaml

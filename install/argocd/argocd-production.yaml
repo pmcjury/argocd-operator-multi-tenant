@@ -1,0 +1,54 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ArgoCD
+metadata:
+  name: argocd
+  labels:
+    app.kubernetes.io/component: argocd-operator
+    app.kubernetes.io/part-of: argocd
+    app.kubernetes.io/managed-by: kustomize
+spec:
+  ingress:
+    enabled: true
+  server:
+    # autoscale:
+    #   enabled: false
+    #   hpa:
+    #     maxReplicas: 3
+    #     minReplicas: 1
+    #     scaleTargetRef:
+    #       apiVersion: extensions/v1beta1
+    #       kind: Deployment
+    #       name: example-argocd-server
+    #     targetCPUUtilizationPercentage: 50
+    insecure: false
+    host: argocd.DOMAIN.com
+    grpc:
+      host: argocd-grpc.DOMAIN.com
+  dex:
+    config: |
+      xyzx
+  grafana:
+    enabled: false
+    host: argocd-grafana.DOMAIN.com
+    image: grafana/grafana
+    size: 1
+    version: 6.5.1
+  helpChatURL: "https://DOMAIN.slack.com/argo-cd"
+  helpChatText: "Chat now!"
+  prometheus:
+    enabled: false
+    host: argocd-prometheus.DOMAIN.com
+    size: 1
+  rbac:
+    policy: ""
+    defaultPolicy: "role:readonly"
+    scopes: "[groups]"
+  repositories: ""
+  statusBadgeEnabled: true
+  tls:
+    ca:
+      configMapName: argocd-ca-cm
+      secretName: argocd-ca-secret
+    certs: []
+  usersAnonymousEnabled: false
+  version: v1.4.2
