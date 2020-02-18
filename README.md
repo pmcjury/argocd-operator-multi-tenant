@@ -1,4 +1,6 @@
-# ArgoCD Gitops
+# argocd-operator-multi-tenant
+
+## Notes
 
 https://argocd-operator.readthedocs.io/en/latest/
 
@@ -10,3 +12,6 @@ https://argocd-operator.readthedocs.io/en/latest/
 - Add any external clusters to
 
 https://operatorhub.io/
+
+clusters/base/cluster/team1/argocd-app
+-> app1-repo/base/apps/
