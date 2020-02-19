@@ -16,6 +16,8 @@ spec:
       server: https://kubernetes.default.svc
     - namespace: prometheus
       server: https://kubernetes.default.svc
+    - namespace: prometheus-operator
+      server: https://kubernetes.default.svc
     - namespace: monitoring
       server: https://kubernetes.default.svc
     - namespace: olm
