@@ -1,4 +1,4 @@
 namespace: argocd
 resources:
-- base/argocd.yaml
-# - base/prometheus-operator.yaml
+  - base/argocd.yaml
+  - base/prometheus-operator.yaml
