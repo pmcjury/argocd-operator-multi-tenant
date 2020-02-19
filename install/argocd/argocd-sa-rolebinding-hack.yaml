@@ -64,6 +64,12 @@ rules:
     verbs:
       - "*"
   - apiGroups:
+      - "batch"
+    resources:
+      - "*"
+    verbs:
+      - "*"
+  - apiGroups:
       - "policy"
     resources:
       - "*"
