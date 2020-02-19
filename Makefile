@@ -1,4 +1,7 @@
 KB = kustomize build
+MK = argocd
+LOCAL_DOMAIN = test
+ARGOCD_DEP_NAME = example-argocd
  
 .PHONY: default omnibus mk-init mk-rm mk-stop mk-addons-list mk-ip mk-argocd-login-password mk-argocd-login mk-argocd-open install install-argocd-cli install-olm install-argocd-operator install-argocd-instance delete help
 
@@ -8,41 +11,45 @@ omnibus: mk-init install ## Omnibus installer
 
 mk-init: ## Initialize olm, argocd operatorm, argocd, etc. deployed to minikube
 	@echo "#### Initializing minikube, enabling addons, and configuring dns ( this can take some time ) ..."
-	@minikube start -p argocd --cpus=4 --disk-size=40gb --memory=8gb
-	@leep 5
-	@minikube addons -p argocd enable ingress
+	@minikube start -p $(MK) --cpus=4 --disk-size=40gb --memory=8gb
 	@sleep 5
-	@minikube addons -p argocd enable ingress-dns
+	@minikube addons -p $(MK) enable ingress
+	@sleep 5
+	@minikube addons -p $(MK) enable ingress-dns
 	@sleep 5
 	@echo "#### Adding ingress-dns add on entry to dns resolvers. Allows you to resolve 'http://*.test'"
-	@echo "domain test\nnameserver `minikube ip -p argocd`\nsearch_order 1\ntimeout 5" | sudo tee /etc/resolver/minikube-argocd-test
+	@echo "domain $(LOCAL_DOMAIN)\nnameserver `minikube ip -p $(MK)`\nsearch_order 1\ntimeout 5" | sudo tee /etc/resolver/minikube-$(MK)-test
+	@minikube addons list -p $(MK)
 
 mk-rm: ## Delete the argocd minikube
-	@minikube delete -p argocd 
+	@minikube delete -p $(MK)
+
+mk-start: ## Start minikube
+	@minikube start -p $(MK)
 
 mk-stop: ## Stop minikube
-	@minikube stop -p argocd 
+	@minikube stop -p $(MK)
 
 mk-addons-list: ## Dispaly minikube addons
-	@minikube addons list -p argocd
+	@minikube addons list -p $(MK)
 
 mk-ip: ## Dispaly minikube ip
-	@minikube ip -p argocd
+	@minikube ip -p $(MK)
 
 mk-argocd-login-password: ## Dispaly the argocd login password deployed to minikube
 	@echo "admin"
-	@kubectl get pods -n argocd -l app.kubernetes.io/name=example-argocd-server -o name | cut -d'/' -f 2
+	@kubectl get pods -n argocd -l app.kubernetes.io/name=$(ARGOCD_DEP_NAME)-server -o name | cut -d'/' -f 2
 
 mk-argocd-login: ## Login to argocd deployed to minikube
 	@argocd login argocd-grpc.test \
 		--insecure \
 		--username admin \
-		--password $(kubectl get pods -n argocd -l app.kubernetes.io/name=example-argocd-server -o name | cut -d'/' -f 2)
+		--password $(kubectl get pods -n argocd -l app.kubernetes.io/name=$(ARGOCD_DEP_NAME)-server -o name | cut -d'/' -f 2)
 
 mk-argocd-open: mk-argocd-login-password ## Open ArgoCD UI deployed to minikube
 	open http://argocd.test/login
 
-install: install-olm install-argocd-operator install-argocd-cli install-argocd-instance ## Install all resources olm, argocd operator, argo, etc.
+install: install-olm install-argocd-operator install-argocd-instance ## Install all resources olm, argocd operator, argo, etc.
 
 install-argocd-cli: ## Install the argocd cli
 	@echo "#### Installing argocd-cli via homebrew"
@@ -74,6 +81,7 @@ delete: ## Delete all k8s resources for argocd, the operator, and olm
 	$(KB) ./install/argocd | kubectl delete -f -
 	$(KB) ./install/argocd-operator | kubectl delete -f -
 	kubectl delete -f ./install/olm
+
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'

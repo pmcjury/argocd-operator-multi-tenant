@@ -1,26 +1,27 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app1
-  # You'll usually want to add your resources to the argocd namespace.
+  name: cluster-provision
   namespace: argocd
-  # Add a this finalizer ONLY if you want these to cascade delete.
+  labels:
+    app.kubernetes.io/component: argocd-operator
+    app.kubernetes.io/part-of: argocd
+    app.kubernetes.io/managed-by: kustomize
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  # The project the application belongs to.
-  project: appproject
+  project: cluster-provision
 
   # Source of the application manifests
   source:
-    repoURL: https://github.com/ORGANIZATION/app1.git
+    repoURL: https://github.com/pmcjury/argocd-operator-multi-tenant
     targetRevision: HEAD
-    path: "."
+    path: "cluster-provision"
 
   # Destination cluster and namespace to deploy the application
   destination:
     server: https://kubernetes.default.svc
-    namespace: team1
+    namespace: argocd
 
   # Sync policy
   syncPolicy:

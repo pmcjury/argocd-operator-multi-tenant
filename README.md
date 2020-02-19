@@ -1,5 +1,9 @@
 # argocd-operator-multi-tenant
 
+## Order of Operations
+
+- install
+
 ## Notes
 
 https://argocd-operator.readthedocs.io/en/latest/
@@ -15,3 +19,8 @@ https://operatorhub.io/
 
 clusters/base/cluster/team1/argocd-app
 -> app1-repo/base/apps/
+
+add clusters
+https://argoproj.github.io/argo-cd/operator-manual/declarative-setup/#clusters
+
+https://argocd-operator.readthedocs.io/en/latest/

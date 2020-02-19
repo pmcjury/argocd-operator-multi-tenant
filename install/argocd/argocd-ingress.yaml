@@ -4,6 +4,7 @@ metadata:
   name: example-argocd
   labels:
     example: ingress
+    env.io/env: dev
 spec:
   ingress:
     enabled: true
@@ -12,3 +13,37 @@ spec:
     host: argocd.test
     grpc:
       host: argocd-grpc.test
+  grafana:
+    enabled: true
+    host: argocd-grafana.test
+    image: grafana/grafana
+    size: 1
+    version: 6.5.1
+  # helpChatURL: "https://DOMAIN.slack.com/argo-cd"
+  # helpChatText: "Chat now!"
+  prometheus:
+    enabled: true
+    host: argocd-prometheus.test
+    size: 2
+  # rbac:
+  #   policy: ""
+  #   defaultPolicy: "role:readonly"
+  #   scopes: "[groups]"
+  repositories: |
+    - url: https://github.com/pmcjury/argocd-operator-multi-tenant
+  repository.credentials: |
+    - url: https://github.com/pmcjury
+      passwordSecret:
+        name: argocd-repositories-secret
+        key: password
+      usernameSecret:
+        name: argocd-repositories-secret
+        key: username
+  statusBadgeEnabled: true
+  # tls:
+  #   ca:
+  #     configMapName: argocd-ca-cm
+  #     secretName: argocd-ca-secret
+  #   certs: []
+  usersAnonymousEnabled: true
+  version: v1.4.2
