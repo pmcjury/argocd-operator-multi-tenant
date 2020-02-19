@@ -82,6 +82,8 @@ delete: ## Delete all k8s resources for argocd, the operator, and olm
 	$(KB) ./install/argocd-operator | kubectl delete -f -
 	kubectl delete -f ./install/olm
 
+flush-dns-cache:
+	sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
