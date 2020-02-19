@@ -21,3 +21,33 @@ roleRef:
   kind: Role
   name: argocd-operator-hack
   apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: argocd-application-controller-hack
+rules:
+  - apiGroups:
+      - argoproj.io
+    resources:
+      - "*"
+    verbs:
+      - "*"
+  - apiGroups:
+      - rbac.authorization.k8s.io
+    resources:
+      - "*"
+    verbs:
+      - "*"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: argocd-application-controller-hack
+subjects:
+  - kind: ServiceAccount
+    name: argocd-application-controller
+roleRef:
+  kind: Role
+  name: argocd-application-controller-hack
+  apiGroup: rbac.authorization.k8s.io
