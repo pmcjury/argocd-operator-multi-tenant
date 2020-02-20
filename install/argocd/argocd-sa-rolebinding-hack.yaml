@@ -104,5 +104,5 @@ subjects:
     namespace: argocd
 roleRef:
   kind: ClusterRole
-  name: argocd-application-controller-cr
+  name: argocd-application-controller-hack
   apiGroup: rbac.authorization.k8s.io

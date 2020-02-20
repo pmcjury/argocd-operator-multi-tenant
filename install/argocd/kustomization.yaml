@@ -1,6 +1,6 @@
 namespace: argocd
 resources:
-  - argocd-sa-rolebinding-hack.yaml
+  - argocd-sa-rolebinding-hack-from-upstream.yaml
   - argocd-ingress.yaml
   - argocd-project.yaml
   - argocd-app.yaml
