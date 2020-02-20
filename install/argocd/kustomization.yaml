@@ -1,13 +1,13 @@
 namespace: argocd
 resources:
-  - argocd-sa-rolebinding-hack-from-upstream.yaml
-  - argocd-ingress.yaml
-  - argocd-project.yaml
-  - argocd-app.yaml
-  - argocd-cluster-app.yaml
-secretGenerator:
-  - name: argocd-repositories-secret
-    envs:
-      - gh.secret.env
-generatorOptions:
-  disableNameSuffixHash: true
+  # - argocd-sa-rolebinding-hack-from-upstream.yaml
+  # - argocd-ingress.yaml
+  # - argocd-project.yaml
+  - argocd-install-app.yaml
+#   - argocd-cluster-app.yaml
+# secretGenerator:
+#   - name: argocd-repositories-secret
+#     envs:
+#       - gh.secret.env
+# generatorOptions:
+#   disableNameSuffixHash: true
