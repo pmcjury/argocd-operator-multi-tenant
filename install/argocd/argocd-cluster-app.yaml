@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: cluster-provisioner
   labels:
-    app.kubernetes.io/component: cluster-provision
+    app.kubernetes.io/component: cluster-provisioner
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/managed-by: kustomize
   finalizers:
