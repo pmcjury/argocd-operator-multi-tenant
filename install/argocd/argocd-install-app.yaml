@@ -1,9 +1,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd
+  name: argocd-install
   labels:
-    app.kubernetes.io/component: argocd-cluster-provision
+    app.kubernetes.io/component: argocd-install
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/managed-by: kustomize
   finalizers:
@@ -13,9 +13,9 @@ spec:
 
   # Source of the application manifests
   source:
-    path: apps
-    repoURL: https://github.com/pmcjury/argocd-example-apps/
+    repoURL: https://github.com/pmcjury/argocd-operator-multi-tenant
     targetRevision: HEAD
+    path: install/argocd
 
   # Destination cluster and namespace to deploy the application
   destination:

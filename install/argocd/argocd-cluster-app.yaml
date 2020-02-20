@@ -1,9 +1,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cluster-provision
+  name: cluster-provisioner
   labels:
-    app.kubernetes.io/component: argocd-operator
+    app.kubernetes.io/component: cluster-provision
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/managed-by: kustomize
   finalizers:
@@ -15,7 +15,7 @@ spec:
   source:
     repoURL: https://github.com/pmcjury/argocd-operator-multi-tenant
     targetRevision: HEAD
-    path: "cluster-provision"
+    path: cluster-provision
 
   # Destination cluster and namespace to deploy the application
   destination:

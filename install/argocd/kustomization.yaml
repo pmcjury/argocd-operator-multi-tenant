@@ -5,9 +5,9 @@ resources:
   - argocd-project.yaml
   - argocd-app.yaml
   - argocd-cluster-app.yaml
-# secretGenerator:
-#   - name: argocd-repositories-secret
-#     envs:
-#       - gh.secret.env
-# generatorOptions:
-#   disableNameSuffixHash: true
+secretGenerator:
+  - name: argocd-repositories-secret
+    envs:
+      - gh.secret.env
+generatorOptions:
+  disableNameSuffixHash: true
