@@ -2,12 +2,12 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: argocd
-  abels:
+  labels:
     app.kubernetes.io/component: argocd-cluster-provision
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/managed-by: kustomize
-    finalizers:
-      - resources-finalizer.argocd.argoproj.io
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: cluster-provision
 
