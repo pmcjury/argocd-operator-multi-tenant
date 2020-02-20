@@ -31,6 +31,7 @@ spec:
   #   scopes: "[groups]"
   repositories: |
     - url: https://github.com/pmcjury/argocd-operator-multi-tenant
+    - url: "https://github.com/pmcjury/argocd-example-apps"
   repository.credentials: |
     - url: https://github.com/pmcjury
       passwordSecret:
