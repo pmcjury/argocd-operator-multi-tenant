@@ -4,6 +4,7 @@ resources:
   - argocd-ingress.yaml
   - argocd-project.yaml
   - argocd-app.yaml
+  - argocd-cluster-app.yaml
 # secretGenerator:
 #   - name: argocd-repositories-secret
 #     envs:
