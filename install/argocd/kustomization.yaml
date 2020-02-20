@@ -1,10 +1,10 @@
 namespace: argocd
 resources:
-  # - argocd-sa-rolebinding-hack-from-upstream.yaml
-  # - argocd-ingress.yaml
-  # - argocd-project.yaml
+  - argocd-sa-rolebinding-hack-from-upstream.yaml
+  - argocd-ingress.yaml
+  - argocd-project.yaml
   - argocd-install-app.yaml
-#   - argocd-cluster-app.yaml
+  - argocd-cluster-app.yaml
 # secretGenerator:
 #   - name: argocd-repositories-secret
 #     envs:
