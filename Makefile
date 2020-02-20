@@ -69,7 +69,7 @@ install-argocd-operator: ## Install the argocd operator
 	@kubectl rollout status -w -n olm deployment/catalog-operator
 	@kubectl wait --for=condition=ready --timeout=60s -n olm -l olm.catalogSource=argocd-catalog pod
 	@$(KB) ./install/argocd-operator| kubectl apply -f -
-	@sleep 5
+	@sleep 15
 
 install-argocd-instance: ## Install the argocd instances
 	@echo "#### Installing argocd instance via argocd operator"
