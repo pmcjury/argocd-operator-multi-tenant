@@ -24,7 +24,7 @@ spec:
   prometheus:
     enabled: true
     host: argocd-prometheus.test
-    size: 2
+    size: 1
   # rbac:
   #   policy: ""
   #   defaultPolicy: "role:readonly"
