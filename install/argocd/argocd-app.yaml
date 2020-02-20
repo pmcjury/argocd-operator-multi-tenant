@@ -13,8 +13,8 @@ spec:
 
   # Source of the application manifests
   source:
-    path: install/argocd
-    repoURL: https://github.com/pmcjury/argocd-operator-multi-tenant
+    path: apps
+    repoURL: https://github.com/pmcjury/argocd-example-apps/
     targetRevision: HEAD
 
   # Destination cluster and namespace to deploy the application
