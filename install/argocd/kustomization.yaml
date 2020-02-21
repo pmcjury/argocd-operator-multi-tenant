@@ -1,13 +1,6 @@
 namespace: argocd
 resources:
-  - argocd-sa-rolebinding-hack-from-upstream.yaml
-  - argocd-ingress.yaml
-  - argocd-project.yaml
-  - argocd-install-app.yaml
-  - argocd-cluster-app.yaml
-# secretGenerator:
-#   - name: argocd-repositories-secret
-#     envs:
-#       - gh.secret.env
-# generatorOptions:
-#   disableNameSuffixHash: true
+  - argocd-ns.yaml
+  - https://github.com/argoproj/argo-cd/manifests/cluster-install?ref=v1.4.2
+patchesStrategicMerge:
+  - argocd-server-deploy-patch.yaml

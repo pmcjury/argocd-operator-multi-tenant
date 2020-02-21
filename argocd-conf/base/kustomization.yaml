@@ -1,0 +1,7 @@
+resources:
+  - argocd-cm.yaml
+  - argocd-cluster-project.yaml
+  - argocd-cluster-app.yaml
+  # - argocd-install-argoc-app.yaml # does this work? will it be circular
+  # - argocd-ingress-http.yaml
+  # - argocd-ingress-grpc.yaml

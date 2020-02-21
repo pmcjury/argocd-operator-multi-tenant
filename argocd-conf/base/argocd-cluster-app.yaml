@@ -9,11 +9,11 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: cluster-provision
+  project: cluster-resources
 
   # Source of the application manifests
   source:
-    repoURL: https://github.com/pmcjury/argocd-operator-multi-tenant
+    repoURL: https://github.com/DOMAIN/REPO
     targetRevision: HEAD
     path: cluster-provision
 

@@ -1,2 +1,5 @@
 *secret*
-*generated*
+**/generated
+**/charts/*.tgz
+.env
+nomad

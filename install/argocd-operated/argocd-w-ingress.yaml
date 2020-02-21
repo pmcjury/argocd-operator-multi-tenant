@@ -14,7 +14,7 @@ spec:
     grpc:
       host: argocd-grpc.test
   grafana:
-    enabled: true
+    enabled: false
     host: argocd-grafana.test
     image: grafana/grafana
     size: 1

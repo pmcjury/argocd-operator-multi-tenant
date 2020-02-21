@@ -1,8 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: cluster-provision
-  namespace: argocd
+  name: cluster-resources
 spec:
   description: Cluster Provision Install select software, operators, namespaces etc. to bootstrap the cluster
   sourceRepos:
@@ -22,6 +21,8 @@ spec:
     - namespace: monitoring
       server: https://kubernetes.default.svc
     - namespace: olm
+      server: https://kubernetes.default.svc
+    - namespace: kube-system
       server: https://kubernetes.default.svc
   # Deny all cluster-scoped resources from being created, except for Namespace
   clusterResourceWhitelist:

@@ -1,0 +1,112 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+data:
+  # Argo CD's externally facing base URL (optional). Required when configuring SSO
+  url: https://argocd.DOMAIN.com
+
+  # Enables application status badge feature
+  statusbadge.enabled: "true"
+
+  # Enables anonymous user access. The anonymous users get default role permissions specified argocd-rbac-cm.yaml.
+  users.anonymous.enabled: "false"
+
+  # the URL for getting chat help, this will typically be your Slack channel for support
+  help.chatUrl: "https://DOMAIN.slack.com/argocd"
+  # the text for getting chat help, defaults to "Chat now!"
+  help.chatText: "Chat now!"
+
+  # The metadata.label key name where Argo CD injects the app name as a tracking label (optional).
+  # Tracking labels are used to determine which resources need to be deleted when pruning.
+  # If omitted, Argo CD injects the app name into the label: 'app.kubernetes.io/instance'
+  application.instanceLabelKey: argocd.argoproj.io/instance
+  # A dex connector configuration (optional). See SSO configuration documentation:
+  # https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/sso
+  # https://github.com/dexidp/dex/tree/master/Documentation/connectors
+  # dex.config: |
+  #   connectors:
+  #     # GitHub example
+  #     - type: github
+  #       id: github
+  #       name: GitHub
+  #       config:
+  #         clientID: aabbccddeeff00112233
+  #         clientSecret: $dex.github.clientSecret
+  #         orgs:
+  #         - name: your-github-org
+  #           teams:
+  #           - red-team
+  # OIDC configuration as an alternative to dex (optional).
+  # oidc.config: |
+  #   name: Okta
+  #   issuer: https://dev-123456.oktapreview.com
+  #   clientID: aaaabbbbccccddddeee
+  #   clientSecret: $oidc.okta.clientSecret
+  #   # Optional set of OIDC scopes to request. If omitted, defaults to: ["openid", "profile", "email", "groups"]
+  #   requestedScopes: ["openid", "profile", "email"]
+  #   # Optional set of OIDC claims to request on the ID token.
+  #   requestedIDTokenClaims: {"groups": {"essential": true}}
+  # Git repositories configure Argo CD with (optional).
+  # This list is updated when configuring/removing repos from the UI/CLI
+  # Note: 'type: helm' field is supported in v1.3+. Use 'helm.repositories' for older versions.
+  # repositories: |
+  #   - url: https://github.com/argoproj/my-private-repository
+  #     passwordSecret:
+  #       name: my-secret
+  #       key: password
+  #     usernameSecret:
+  #       name: my-secret
+  #       key: username
+  #     sshPrivateKeySecret:
+  #       name: my-secret
+  #       key: sshPrivateKey
+  #   - type: helm
+  #     url: https://storage.googleapis.com/istio-prerelease/daily-build/master-latest-daily/charts
+  #     name: istio.io
+  #   - type: helm
+  #     url: https://my-private-chart-repo.internal
+  #     name: private-repo
+  #     usernameSecret:
+  #       name: my-secret
+  #       key: username
+  #     passwordSecret:
+  #       name: my-secret
+  #       key: password
+  # Non-standard and private Helm repositories (deprecated in 1.3).
+  # helm.repositories: |
+  #   - url: https://storage.googleapis.com/istio-prerelease/daily-build/master-latest-daily/charts
+  #     name: istio.io
+  #   - url: https://my-private-chart-repo.internal
+  #     name: private-repo
+  #     usernameSecret:
+  #       name: my-secret
+  #       key: username
+  #     passwordSecret:
+  #       name: my-secret
+  #       key: password
+  # Configuration to completely ignore entire classes of resource group/kinds (optional).
+  # Excluding high-volume resources improves performance and memory usage, and reduces load and
+  # bandwidth to the Kubernetes API server.
+  # These are globs, so a "*" will match all values.
+  # If you omit groups/kinds/clusters then they will match all groups/kind/clusters.
+  # NOTE: events.k8s.io and metrics.k8s.io are excluded by default
+  # resource.exclusions: |
+  #   - apiGroups:
+  #     - repositories.stash.appscode.com
+  #     kinds:
+  #     - Snapshot
+  #     clusters:
+  #     - "*.local"
+  # Configuration to add a config management plugin.
+  # configManagementPlugins: |
+  #   - name: kasane
+  #     init:
+  #       command: [kasane, update]
+  #     generate:
+  #       command: [kasane, show]
+  # Build options/parameters to use with `kustomize build` (optional)
+  # kustomize.buildOptions: --load_restrictor none
