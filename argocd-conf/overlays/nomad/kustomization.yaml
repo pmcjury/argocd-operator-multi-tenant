@@ -1,7 +1,6 @@
 namespace: argocd
 resources:
   - ../../base
-  - argocd-secret.yaml
 patchesStrategicMerge:
   - argocd-cm-patch.yaml
   - argocd-cluster-project-patch.yaml
