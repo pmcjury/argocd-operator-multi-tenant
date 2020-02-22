@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+data:
+  url: https://argocd.test
+  repositories: |
+    - url: https://github.com/pmcjury/argocd-operator-multi-tenant
+    - url: https://github.com/pmcjury/argocd-example-apps
+  repository.credentials: |
+    - url: https://github.com/pmcjury
+      passwordSecret:
+        name: argocd-repositories-secret
+        key: password
+      usernameSecret:
+        name: argocd-repositories-secret
+        key: username
+  ## Enable Kustomize Plugins
+  kustomize.buildOptions: "--enable_alpha_plugins"

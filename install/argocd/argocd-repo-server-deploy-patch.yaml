@@ -1,17 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: argocd-server
+  name: argocd-repo-server
 spec:
   template:
     spec:
       containers:
-        - command:
-            - argocd-server
-            - --staticassets
-            - /shared/app
-            - --insecure
-          name: argocd-server
+        - name: argocd-repo-server
           env:
             - name: "GOOGLE_APPLICATION_CREDENTIALS"
               value: "/app/config/gcp/key-file.json"

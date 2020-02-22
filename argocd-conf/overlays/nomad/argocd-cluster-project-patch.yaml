@@ -1,0 +1,8 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: cluster-resources
+spec:
+  sourceRepos:
+    - https://github.com/pmcjury/argocd-operator-multi-tenant
+    - https://github.com/pmcjury/argocd-example-apps

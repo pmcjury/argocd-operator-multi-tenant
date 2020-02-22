@@ -1,0 +1,6 @@
+creation_rules:
+  # encrypt files using GCP KMS ending in -secret.yaml
+  - path_regex: ".*/*-secret.yaml$"
+    encrypted_regex: "^(data|stringData)$"
+    gcp_kms: projects/dev-host-environment-4d3e/locations/global/keyRings/sops/cryptoKeys/sops-key
+  - gcp_kms: projects/dev-host-environment-4d3e/locations/global/keyRings/sops/cryptoKeys/sops-key

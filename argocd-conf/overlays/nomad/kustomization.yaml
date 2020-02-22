@@ -1,0 +1,10 @@
+namespace: argocd
+resources:
+  - ../../base
+  - argocd-secret.yaml
+patchesStrategicMerge:
+  - argocd-cm-patch.yaml
+  - argocd-cluster-project-patch.yaml
+  - argocd-cluster-app-patch.yaml
+generators:
+  - ./secret-enc-generator.yaml
