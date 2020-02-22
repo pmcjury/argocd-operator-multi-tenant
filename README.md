@@ -24,3 +24,22 @@ add clusters
 https://argoproj.github.io/argo-cd/operator-manual/declarative-setup/#clusters
 
 https://argocd-operator.readthedocs.io/en/latest/
+
+192.168.128.0/28
+
+gcloud compute firewall-rules create prometheus-operator-webhooks \
+ --action ALLOW \
+ --direction INGRESS \
+ --source-ranges 192.168.128.0/28 \
+ --rules tcp:8443 \
+ --target-tags gke-nomad-health-dev-cluster-158097f1-node \
+ --description "Allow Prometheus Operator webhooks"
+
+gcloud compute firewall-rules create cert-operator-webhooks \
+ --action ALLOW \
+ --direction INGRESS \
+ --source-ranges 192.168.128.0/28 \
+ --target-tags gke-nomad-health-dev-cluster-158097f1-node \
+ --description "Allow Cert Manager webhooks"
+
+k port-forward -n argocd svc/argocd-server 8080:443

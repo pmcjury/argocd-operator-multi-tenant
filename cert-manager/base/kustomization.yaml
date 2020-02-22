@@ -1,0 +1,2 @@
+resources:
+  - cert-manager-v0.13.1-upstream.yaml
