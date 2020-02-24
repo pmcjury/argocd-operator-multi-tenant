@@ -1,6 +1,6 @@
 namespace: argocd
 resources:
-  - base/cert-manager-ns.yaml
-  - base/cert-manager-app.yaml
-  - base/prometheus-operator-ns.yaml
-  - base/prometheus-operator-app.yaml
+  - cert-manager-ns.yaml
+  - cert-manager-app.yaml
+  - prometheus-operator-ns.yaml
+  - prometheus-operator-app.yaml
