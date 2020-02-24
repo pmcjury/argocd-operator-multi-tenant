@@ -2,4 +2,10 @@
 **/generated
 **/charts/*.tgz
 .env
-nomad
+*.bash_history
+
+key-file.json
+# allow any file containing -enc indicating it's encrypted
+!*-enc*
+
+

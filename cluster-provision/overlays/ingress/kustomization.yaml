@@ -1,0 +1,5 @@
+namespace: argocd
+resources:
+  - ../../base
+  - ingress-nginx-ns.yaml
+  - ingress-nginx-app.yaml
