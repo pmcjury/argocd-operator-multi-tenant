@@ -15,7 +15,7 @@ spec:
   source:
     repoURL: https://github.com/DOMAIN/REPO
     targetRevision: HEAD
-    path: cluster-provision
+    path: cluster-provision/overlays/minikube
 
   # Destination cluster and namespace to deploy the application
   destination:
